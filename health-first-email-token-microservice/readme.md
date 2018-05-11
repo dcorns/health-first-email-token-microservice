@@ -1,5 +1,5 @@
 # health-first-email-token-microservice
-A micro service for issuing and verifying Jason Web Tokens based on an email address
+A micro service for issuing and verifying Jason Web Tokens.
 ## Requirements
 Docker Installation compatible with the following versions:
    API: 1.37
@@ -54,12 +54,12 @@ The service provides a rest API for accessing its features. It returns a json ob
    For example
    ```http://www.serviceisrunninghere.com/token/myemail@email.com```
    returns {"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w","status":"success"}
-Email validation is expected to be performed by the consumer of the service. If the input to the service is not a valid email, it will simply return a token based on that input. If the input is so bad a token can not be created, it will return {"status":"failure"}
+Email validation is expected to be performed by the consumer of the service. If the input to the service is not a valid email, it will simply return a token with that input contained in the email field of the payload. If the input is so bad a token can not be created, it will return {"status":"failure"}
 ### Validate a token
 /validate/token
    For example
    ```http://www.serviceisrunninghere.com/validate/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w```
-   returns token payload:
+   returns a token payload similar to the following:
           {"iss":"healthfirst","exp":1526005915681,"iat":1525987944800,"email":"myemail@email.com","status":"success"}
    if the token is valid
    otherwise it returns {"status":"failure"}
