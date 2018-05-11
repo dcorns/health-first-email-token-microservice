@@ -31,12 +31,13 @@ Docker Installation compatible with the following versions:
    **Note** that in order for the new Dockerfile to make any changes to the service you must stop it, if it is running, and then build it again using ```docker build -t health-first-email-token-microservice .```
    Changing defaults in the run statement.
    You can change all the default settings when running the container.
-      ```
+```
       docker run -p listeningPortNumber:8080 -d -e SECRET="useThisSecret" -e ISS="useThisForISS" -e EXP=expValue health-first-email-token-microservice
-      ```
+```
    For example to have a secret of 'better secret', an iss of 'my other site', a token expiration of 10 minutes and listen on port 3000:
-   ```docker run -p 3000:8080 -d -e SECRET="better secret" -e ISS="my other site" -e EXP=10 health-first-email-token-microservice
-   ```
+```
+docker run -p 3000:8080 -d -e SECRET="better secret" -e ISS="my other site" -e EXP=10 health-first-email-token-microservice
+```
 
 ### Stopping The Service
 To stop the service, you first need to get the container id of the service using
@@ -58,17 +59,21 @@ The service provides a rest API for accessing its features. It returns a json ob
 ### Requesting a token
 **/token/emailaddress**
    For example
-   ```http://www.serviceisrunninghere.com/token/myemail@email.com```
-   returns {"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w","status":"success"}
-Email validation is expected to be performed by the consumer of the service. If the input to the service is not a valid email, it will simply return a token with that input contained in the email field of the payload. If the input is so bad a token can not be created, it will return {"status":"failure"}
+```
+http://www.serviceisrunninghere.com/token/myemail@email.com
+```
+   returns **{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w","status":"success"}**
+Email validation is expected to be performed by the consumer of the service. If the input to the service is not a valid email, it will simply return a token with that input contained in the email field of the payload. If the input is so bad a token can not be created, it will return ***{"status":"failure"}**
 ### Validate a token
 **/validate/token**
    For example
-   ```http://www.serviceisrunninghere.com/validate/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w```
+```
+http://www.serviceisrunninghere.com/validate/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJoZWFsdGhmaXJzdCIsImV4cCI6MTUyNTk5ODk1ODcwOSwiaWF0IjoxNTI1OTgxMDA3ODU2LCJlbWFpbCI6Ii9teWVtYWlsQGVtYWlsLmNvbSJ9.qcY-2joE-fYAqPzEhoNQiYNhM21ev9eBgwzhu4sAxYf-V-S9js5MhTYKBSeoiz3yHdCn2V_5OP52R94oWrRM_w
+```
    returns a token payload similar to the following:
-          {"iss":"healthfirst","exp":1526005915681,"iat":1525987944800,"email":"myemail@email.com","status":"success"}
+          **{"iss":"healthfirst","exp":1526005915681,"iat":1525987944800,"email":"myemail@email.com","status":"success"}**
    if the token is valid
-   otherwise it returns {"status":"failure"}
+   otherwise it returns **{"status":"failure"}**
 
 ## Testing
 For tests to pass, they must be run with the defaults set in Dockerfile.
