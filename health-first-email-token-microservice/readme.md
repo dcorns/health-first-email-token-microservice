@@ -2,10 +2,10 @@
 A micro service for issuing and verifying Jason Web Tokens.
 ## Requirements
 Docker Installation compatible with the following versions:
-   API: 1.37
-   Client/Server: 18.03.1-ce
-Yarn compatible with version 1.3.2
-Yarn is the package manager used in the Dockerfile. If you prefer to use npm, change 'yarn' to 'npm' in the Dockerfile before running docker build.
+   * API: 1.37
+   * Client/Server: 18.03.1-ce
+   * Yarn compatible with version 1.3.2
+      * Yarn is the package manager used in the Dockerfile. If you prefer to use npm, change 'yarn' to 'npm' in the Dockerfile before running docker build.
 ## Installation
 1. git clone this repository
 2. Navigate to the directory in which the repository was cloned
