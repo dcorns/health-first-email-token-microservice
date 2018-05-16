@@ -102,17 +102,5 @@ describe('service.js', () => {
           expect(res.body.iat).to.be.a('number');
         });
     });
-    it('stores other data in the JWT payload when provided', () => {
-      return chai.request('http://localhost')
-        .get('/token/blabla')
-        .then(res => {
-          const payload = jwt.decode(res.body.token,'the big secret!',false,'HS512');
-          expect(payload).to.be.an('object');
-          expect(payload.iss).to.equal('healthfirst');
-          expect(payload.exp).to.be.a('number');
-          expect(payload.iat).to.be.a('number');
-          expect(payload.email).to.equal('blabla');
-        });
-    });
   });
 });
