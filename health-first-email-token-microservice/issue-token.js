@@ -8,7 +8,7 @@
 const jwt = require('jwt-simple');
 //const secret = 'the big secret!';
 const secret = process.env.SECRET;
-const exp = process.env.EXP * 60 * 60000 + Date.now();
+const exp = process.env.EXP * 60000 + Date.now();
 const iss = process.env.ISS;
 module.exports = (emailaddress) => {
   const payload = {
